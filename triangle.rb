@@ -15,11 +15,17 @@
 #
 def triangle(a, b, c)
   sides = [a, b, c].uniq
-  type = case sides.size
+  if a <= 0 or b <= 0 or c <= 0
+    raise TriangleError, "all sides should be greater than 0"
+  end
+  if a + b <= c or a + c <= b or b + c <= a
+    raise TriangleError, "the sum of two sizes must be greater than the third side"
+  end
+  case sides.size
     when 1 then :equilateral
     when 2 then :isosceles
     when 3 then :scalene
-    end
+  end
 end
 
 # Error class used in part 2.  No need to change this code.
